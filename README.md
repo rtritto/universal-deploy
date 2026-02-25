@@ -1,8 +1,14 @@
 # universal-deploy
 
-*Deploying Vite apps anywhere.*
+*Deploy any Vite app, anywhere.*
 
 ## Goal
+
+The goal of the Universal Deploy project is to enable any Vite app (vanilla Vite, Astro, Vike, TanStack, ...) to be deployed anywhere (Netlify, Cloudflare, Vercel, self-hosted, ...).
+
+Our approach follows [Netlify's RFC](https://github.com/vitejs/vite/discussions/20907): the `@universal-deploy` packages provide a flexible toolset of low-level utilities and conventions, enabling integrations that are both flexible and seamless between Vite apps and deployment providers.
+
+## Technical goal
 
 POC that solves the issue point 1 and 3 of [Netlify's RFC](https://github.com/vitejs/vite/discussions/20907), i.e. "Server entry point location" and "Routing metadata".
 Mostly, how can a deployment target (Netlify, Cloudflare, Node, etc.) find and use the different server entries defined by a framework (or user)?
