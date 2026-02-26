@@ -1,16 +1,23 @@
 # universal-deploy
 
-*Deploy any Vite app, anywhere.*
+*Deploy Vite apps anywhere.*
 
 ## Goal
 
-The goal of the Universal Deploy project is to enable any Vite app (vanilla Vite, Astro, Vike, TanStack, ...) to be deployed anywhere (Netlify, Cloudflare, Vercel, self-hosted, ...).
+The goal of the Universal Deploy project is to enable any Vite app (vanilla Vite, Astro, Vike, TanStack, ...) to be deployed anywhere (Netlify, Cloudflare, Vercel, self-hosted, ...), in a zero-config fashion.
 
-Our approach follows [Netlify's RFC](https://github.com/vitejs/vite/discussions/20907): the `@universal-deploy` packages provide a flexible toolset of low-level utilities and conventions, enabling integrations that are both flexible and seamless between Vite apps and deployment providers.
+**Zero-config**
 
-## Technical goal
+The only thing the user needs to do is add a deployment Vite plugin (`@netlify/vite-plugin`/`@cloudflare/vite-plugin`/`vite-plugin-vercel`/`@edgeone/vite`/...) to `vite.config.js`. That's it.
 
-POC that solves the issue point 1 and 3 of [Netlify's RFC](https://github.com/vitejs/vite/discussions/20907), i.e. "Server entry point location" and "Routing metadata".
+## Approach
+
+Our approach follows [Netlify's RFC](https://github.com/vitejs/vite/discussions/20907): the `@universal-deploy/*` packages provide a flexible toolset of low-level utilities and conventions, enabling integrations that are both flexible and seamless between Vite apps and deployment providers.
+
+> [!NOTE]
+> The `@universal-deploy/*` packages are only used internally by frameworks and deployment providers — users don't see the existence of `@universal-deploy/*`.
+
+This repository is a POC that solves the issue point 1 and 3 of [Netlify's RFC](https://github.com/vitejs/vite/discussions/20907), i.e. "Server entry point location" and "Routing metadata".
 Mostly, how can a deployment target (Netlify, Cloudflare, Node, etc.) find and use the different server entries defined by a framework (or user)?
 
 This POC demonstrates that we can solve this issue with a minimal API.
