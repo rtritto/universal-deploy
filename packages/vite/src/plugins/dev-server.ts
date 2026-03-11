@@ -1,6 +1,6 @@
+import { catchAllEntry } from "@universal-deploy/store";
 import { createMiddleware } from "@universal-middleware/express";
 import type { Environment, FetchableDevEnvironment, Plugin, RunnableDevEnvironment } from "vite";
-import { catchAllEntry } from "../index.js";
 import { assertFetchable, type Fetchable } from "../utils.js";
 
 // Vite's isRunnableDevEnvironment isn't reliable when multiple Vite versions are installed

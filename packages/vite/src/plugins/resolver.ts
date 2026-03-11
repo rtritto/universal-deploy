@@ -1,5 +1,5 @@
+import { type EntryMeta, getAllEntries } from "@universal-deploy/store";
 import type { Environment, Plugin } from "vite";
-import { type EntryMeta, getAllEntries } from "../index.js";
 
 export interface ResolverApi {
   /**

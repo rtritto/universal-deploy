@@ -15,7 +15,6 @@ export default defineConfig([
     ...commonOptions,
     platform: "node",
     entry: {
-      vite: "./src/vite.ts",
       index: "./src/index.ts",
     },
   },

@@ -1,8 +1,9 @@
+import { getAllEntries } from "@universal-deploy/store";
 import { addRoute, createRouter } from "rou3";
 import { compileRouterToString } from "rou3/compiler";
 import type { Plugin } from "vite";
 import { catchAllId } from "../const.js";
-import { getAllEntries } from "../index.js";
+import { assertFetchable } from "../utils.js";
 
 // A virtual module aggregating all routes defined in the store. Can be overridden by plugins
 const re_catchAll = /^virtual:ud:catch-all$/;
@@ -95,13 +96,7 @@ const __map = {
 
 ${compiledFindRoute};
 
-function assertFetchable(mod) {
-  if (!mod || typeof mod !== "object") throw new Error("Missing default export");
-  if ("default" in mod && mod.default) mod = mod.default;
-  if (!mod || typeof mod !== "object" || !("fetch" in mod) || typeof mod.fetch !== "function")
-    throw new Error("Default export must include a { fetch() } function");
-  return mod;
-}
+${assertFetchable.toString()}
 
 export default {
   fetch(request) {

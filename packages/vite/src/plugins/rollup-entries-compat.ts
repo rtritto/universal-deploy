@@ -1,5 +1,5 @@
+import { addEntry } from "@universal-deploy/store";
 import type { Plugin } from "vite";
-import { addEntry } from "../index.js";
 import { dependsOn } from "../utils.js";
 
 /**

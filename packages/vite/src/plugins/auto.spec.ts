@@ -1,7 +1,7 @@
 import { node } from "@universal-deploy/node/vite";
 import { resolveConfig } from "vite";
 import { describe, expect, it } from "vitest";
-import { auto } from "./vite.js";
+import { auto } from "./auto.js";
 
 // Mock/Stub plugins for other adapters to simulate their presence
 const mockVercelPlugin = () => ({ name: "vite-plugin-vercel" });
@@ -10,7 +10,7 @@ const mockNetlifyPlugin = () => ({ name: "ud:netlify:" });
 
 describe("auto() plugin", () => {
   it("enables node adapter when no other target is present", async () => {
-    const plugins = auto({ node: { importer: "test" } });
+    const plugins = auto();
     const config = await resolveConfig(
       {
         plugins: [plugins],

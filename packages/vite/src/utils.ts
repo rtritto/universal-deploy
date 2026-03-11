@@ -2,8 +2,8 @@ import type { Plugin } from "vite";
 import { catchAllId } from "./const.js";
 
 export const pluginsUsage = {
-  [catchAllId]: "@universal-deploy/store/vite",
-  "ud:resolver": "@universal-deploy/store/vite",
+  [catchAllId]: "@universal-deploy/vite",
+  "ud:resolver": "@universal-deploy/vite",
 } as const;
 
 export function dependsOn(pluginName: keyof typeof pluginsUsage) {

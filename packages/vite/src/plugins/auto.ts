@@ -1,6 +1,6 @@
 import { node } from "@universal-deploy/node/vite";
-import { catchAll, devServer } from "@universal-deploy/store/vite";
 import type { ConfigEnv, ConfigPluginContext, Plugin, UserConfig } from "vite";
+import { catchAll, devServer } from "../index.js";
 
 type NodePluginOptions = Parameters<typeof node>[0];
 
