@@ -6,9 +6,18 @@
 
 The goal of the Universal Deploy project is to enable any Vite app (vanilla Vite, Astro, Vike, TanStack, ...) to be deployed anywhere (Netlify, Cloudflare, Vercel, self-hosted, ...), in a zero-config fashion.
 
+### For framework developers
+
+Frameworks can register their server entries and routing information into a global store. This allows deployment providers to automatically discover and handle them. For extensive documentation on how to integrate your framework, see the [docs](./docs/framework-developers.md) folder.
+
+### For deployment providers
+
+Deployment providers simply need to read the registered entries from the store or use the provided catchall entry to handle routing. For implementation examples, see [`adapter-node`](./packages/adapter-node), [`adapter-netlify`](./packages/adapter-netlify), and [`vite-plugin-vercel@11`](https://github.com/magne4000/vite-plugin-vercel).
+
 **Zero-config**
 
-The user just adds a deployment Vite plugin (`@netlify/vite-plugin`/`@cloudflare/vite-plugin`/`vite-plugin-vercel`/`@edgeone/vite`/...) to `vite.config.js` — that's it. Deployment Vite plugins deeply integrate in a zero-config and seamless fashion.
+Deployment Vite plugins (`@netlify/vite-plugin`/`@cloudflare/vite-plugin`/`vite-plugin-vercel`/`@edgeone/vite`/...) deeply integrate in a zero-config and seamless fashion.
+In many cases, the user just adds the plugin to their `vite.config.js`. Frameworks can choose to automate this, removing any configuration requirement from the user.
 
 ## Approach
 
@@ -25,7 +34,7 @@ This POC demonstrates that we can solve this issue with a minimal API.
 ## Features
 
 - **Global Store**: Register server entries ([`@universal-deploy/store`](./packages/store))
-- **Universal Routing**: Via the [`URLPattern` standard](https://developer.mozilla.org/en-US/docs/Web/API/URLPattern)
+- **Universal Routing**: Using `rou3` format
 - **Minimal conventions**: Can easily be adopted by any Vite-based framework
 
 ## Core Concepts
@@ -44,6 +53,10 @@ addEntry({
 });
 ```
 
+> [!NOTE]
+> `addEntry` isn't a definitive API; a common convention between all actors has yet to be established.
+
+
 See the [store documentation](./packages/store/README.md) for full API details.
 
 ### Vite Plugins
@@ -57,7 +70,9 @@ For advanced usage and low-level plugins like `devServer`, `catchAll`, and `comp
 ### Adapters
 
 Temporary packages that demonstrate how deployment plugins can integrate `@universal-deploy/store`.
-Packages like `@universal-deploy/netlify` will no longer be required once directly supported by Vite deployment plugins (e.g. `@netlify/vite-plugin`).
+
+> [!NOTE]
+> Packages like `@universal-deploy/netlify` will no longer be required once directly supported by Vite deployment plugins (e.g. `@netlify/vite-plugin`).
 
 - **[`@universal-deploy/netlify`](./packages/adapter-netlify)**
 - **[`@universal-deploy/node`](./packages/adapter-node)** (Node.js, Bun, Deno)
@@ -65,7 +80,7 @@ Packages like `@universal-deploy/netlify` will no longer be required once direct
 Already compatible:
 
 - **`@cloudflare/vite-plugin`**
-- **[`vite-plugin-vercel@beta`](https://github.com/magne4000/vite-plugin-vercel/pull/207)**
+- **[`vite-plugin-vercel@11`](https://github.com/magne4000/vite-plugin-vercel/pull/207)**
 
 ## Usage
 ### Framework authors
