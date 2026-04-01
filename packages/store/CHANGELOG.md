@@ -1,5 +1,15 @@
 # @universal-deploy/store
 
+## 0.2.0
+
+### Minor Changes
+
+- a59afa8: feat: @universal-deploy/vite package
+
+### Patch Changes
+
+- 8fc901f: feat: onReady and onCreate hooks
+
 ## 0.1.4
 
 ### Patch Changes

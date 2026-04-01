@@ -1,5 +1,15 @@
 # @universal-deploy/node
 
+## 0.1.3
+
+### Patch Changes
+
+- 8fc901f: feat: onReady and onCreate hooks
+- a59afa8: feat: @universal-deploy/vite package
+- Updated dependencies [8fc901f]
+- Updated dependencies [a59afa8]
+  - @universal-deploy/store@0.2.0
+
 ## 0.1.2
 
 ### Patch Changes
