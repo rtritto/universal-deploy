@@ -1,5 +1,13 @@
 # @universal-deploy/node
 
+## 0.1.4
+
+### Patch Changes
+
+- b96ff1f: feat: onReady and onCreate hooks
+- Updated dependencies [b96ff1f]
+  - @universal-deploy/store@0.2.1
+
 ## 0.1.3
 
 ### Patch Changes

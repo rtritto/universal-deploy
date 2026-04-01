@@ -1,5 +1,14 @@
 # @universal-deploy/vite
 
+## 0.1.1
+
+### Patch Changes
+
+- b96ff1f: feat: onReady and onCreate hooks
+- Updated dependencies [b96ff1f]
+  - @universal-deploy/node@0.1.4
+  - @universal-deploy/store@0.2.1
+
 ## 0.1.0
 
 ### Minor Changes
