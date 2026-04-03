@@ -1,5 +1,11 @@
 # @universal-deploy/vite
 
+## 0.1.3
+
+### Patch Changes
+
+- a10501c: feat: `resolveTargets` plugin
+
 ## 0.1.2
 
 ### Patch Changes
