@@ -1,5 +1,11 @@
 # @universal-deploy/vite
 
+## 0.1.4
+
+### Patch Changes
+
+- 64ed76d: feat: resolveTargets now receives an array
+
 ## 0.1.3
 
 ### Patch Changes
