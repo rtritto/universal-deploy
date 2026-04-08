@@ -2,21 +2,18 @@ import type { Plugin, UserConfig } from "vite";
 import { INSTANCE } from "../const.js";
 import { asyncFlatten } from "../utils.js";
 
-export interface SupportedTargets {
-  vercel: boolean;
-  cloudflare: boolean;
-  netlify: boolean;
-  node: boolean;
-}
+export type SupportedTarget =
+  | "vite-plugin-vercel"
+  | "@cloudflare/vite-plugin"
+  | "@universal-deploy/netlify"
+  | "@universal-deploy/node";
 
 /**
- * Resolves an object of supported targets.
- *
- * Each value indicates whether the target is present in the Vite plugins.
+ * Resolves an array of supported target plugins.
  *
  * @param callback
  */
-export function resolveTargets(callback: (targets: SupportedTargets) => void | Promise<void>): Plugin {
+export function resolveTargets(callback: (targets: SupportedTarget[]) => void | Promise<void>): Plugin {
   const plugin: Plugin = {
     name: "universal-deploy:resolve-targets-callback",
     config: {
@@ -36,15 +33,22 @@ export async function noDeploymentTargetFound(thisNodePlugin: Plugin, c: UserCon
   return Object.values(targets).every((target) => !target);
 }
 
-async function findSupportedDeploymentTargets(thisNodePlugin: Plugin, c: UserConfig): Promise<SupportedTargets> {
+async function findSupportedDeploymentTargets(thisNodePlugin: Plugin, c: UserConfig): Promise<SupportedTarget[]> {
   const plugins = (await asyncFlatten((c.plugins ?? []) as Plugin[])).filter((p): p is Plugin => Boolean(p));
+  const found: SupportedTarget[] = [];
 
   // vite-plugin-vercel
-  const vitePluginVercel = plugins.some((p) => p.name.match(/^vite-plugin-vercel/));
+  if (plugins.some((p) => p.name.match(/^vite-plugin-vercel/))) {
+    found.push("vite-plugin-vercel");
+  }
   // @cloudflare/vite-plugin
-  const cloudflareVitePlugin = plugins.some((p) => p.name.match(/^vite-plugin-cloudflare/));
+  if (plugins.some((p) => p.name.match(/^vite-plugin-cloudflare/))) {
+    found.push("@cloudflare/vite-plugin");
+  }
   // @netlify/vite-plugin (via @universal-deploy/netlify)
-  const netlifyVitePlugin = plugins.some((p) => p.name.match(/^ud:netlify/));
+  if (plugins.some((p) => p.name.match(/^ud:netlify/))) {
+    found.push("@universal-deploy/netlify");
+  }
 
   // Check for other instances of ud:node:emit that are NOT this one
   const otherNodePlugin = plugins.some(
@@ -54,10 +58,9 @@ async function findSupportedDeploymentTargets(thisNodePlugin: Plugin, c: UserCon
       p[INSTANCE] !== thisNodePlugin?.[INSTANCE],
   );
 
-  return {
-    vercel: vitePluginVercel,
-    cloudflare: cloudflareVitePlugin,
-    netlify: netlifyVitePlugin,
-    node: otherNodePlugin,
-  };
+  if (otherNodePlugin) {
+    found.push("@universal-deploy/node");
+  }
+
+  return found;
 }
