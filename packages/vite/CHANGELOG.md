@@ -1,5 +1,11 @@
 # @universal-deploy/vite
 
+## 0.1.6
+
+### Patch Changes
+
+- a2864e0: fix: `catchAll` plugin now relies on dynamic imports
+
 ## 0.1.5
 
 ### Patch Changes
