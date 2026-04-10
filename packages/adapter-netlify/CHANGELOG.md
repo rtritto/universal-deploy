@@ -1,5 +1,11 @@
 # @universal-deploy/netlify
 
+## 0.2.1
+
+### Patch Changes
+
+- c851847: fix: ensure that Netlify's adapter only finds a single server entry
+
 ## 0.2.0
 
 ### Minor Changes
