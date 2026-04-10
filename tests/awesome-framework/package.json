@@ -17,7 +17,7 @@
     "@universal-deploy/vite": "workspace:^",
     "tsdown": "^0.21.1",
     "typescript": "^5.9.3",
-    "vite": "^8.0.0-beta.18"
+    "vite": "^8.0.8"
   },
   "peerDependencies": {
     "@universal-middleware/core": "^0.4.13",
