@@ -1,5 +1,11 @@
 # @universal-deploy/vite
 
+## 0.1.7
+
+### Patch Changes
+
+- 82db7bd: feat: auto install glue plugins
+
 ## 0.1.6
 
 ### Patch Changes
