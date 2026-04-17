@@ -1,5 +1,11 @@
 # @universal-deploy/node
 
+## 0.1.6
+
+### Patch Changes
+
+- b292826: use magic-string for transformation
+
 ## 0.1.5
 
 ### Patch Changes
