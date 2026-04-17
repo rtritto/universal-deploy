@@ -1,5 +1,11 @@
 # @universal-deploy/netlify
 
+## 0.2.2
+
+### Patch Changes
+
+- 467ac19: fix: wider vite peer dependency
+
 ## 0.2.1
 
 ### Patch Changes
