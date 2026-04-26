@@ -39,24 +39,21 @@ export function node(options?: { static?: string | boolean; importer?: string })
             if (!resolved) {
               throw new Error(`Failed to resolve importer ${options.importer}`);
             }
+            return {
+              id: resolved.id,
+            };
           }
-          if (!resolved) {
-            try {
-              // Use node resolution to find a sub dependency
-              const require = createRequire(import.meta.url);
-              const entry = require.resolve("@universal-deploy/node/serve");
+          try {
+            // Use node resolution to find a sub dependency
+            const require = createRequire(import.meta.url);
+            const entry = require.resolve("@universal-deploy/node/serve");
 
-              return {
-                id: entry,
-              };
-            } catch {
-              throw new Error(`Cannot find server entry ${JSON.stringify(id)}`);
-            }
+            return {
+              id: entry,
+            };
+          } catch {
+            throw new Error(`Cannot find server entry ${JSON.stringify(id)}`);
           }
-
-          return {
-            id: resolved.id,
-          };
         },
       },
 
