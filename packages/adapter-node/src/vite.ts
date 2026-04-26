@@ -33,13 +33,10 @@ export function node(options?: { static?: string | boolean; importer?: string })
           id: re_udNode,
         },
         async handler(id, importer) {
-          let importerResolvedId: string | undefined;
+          let resolved: { id: string} | undefined;
           if (options?.importer) {
-            const importerResolved = await this.resolve(options.importer);
-            importerResolvedId = importerResolved?.id;
+            resolved = await this.resolve(options.importer, importer);
           }
-
-          const resolved = await this.resolve("@universal-deploy/node/serve", importerResolvedId ?? importer);
           if (!resolved) {
             try {
               // Use node resolution to find a sub dependency
