@@ -21,7 +21,7 @@ function findClientOutDir(env: Environment) {
 }
 
 // Creates a server and listens for connections in Node/Deno/Bun
-export function node(options?: { static?: string | boolean; importer?: string }): Plugin[] {
+export function node(options?: { static?: string | boolean; importer?: string; customServe?: string }): Plugin[] {
   return [
     // Resolves virtual:ud:node-entry to its node runtime id
     {
@@ -39,18 +39,28 @@ export function node(options?: { static?: string | boolean; importer?: string })
             importerResolvedId = importerResolved?.id;
           }
 
-          const resolved = await this.resolve("@universal-deploy/node/serve", importerResolvedId ?? importer);
-          if (!resolved) {
-            try {
-              // Use node resolution to find a sub dependency
-              const require = createRequire(import.meta.url);
-              const entry = require.resolve("@universal-deploy/node/serve");
+          let resolved: Awaited<ReturnType<typeof this.resolve>> | undefined;
+          if (options?.customServe) {
+            resolved = await this.resolve(options.customServe, importerResolvedId ?? importer);
+            if (!resolved) {
+              throw new Error(
+                `Failed to resolve customServe option ${JSON.stringify(options.customServe)} from ${JSON.stringify(importerResolvedId ?? importer)}`,
+              );
+            }
+          } else {
+            resolved = await this.resolve("@universal-deploy/node/serve", importerResolvedId ?? importer);
+            if (!resolved) {
+              try {
+                // Use node resolution to find a sub dependency
+                const require = createRequire(import.meta.url);
+                const entry = require.resolve("@universal-deploy/node/serve");
 
-              return {
-                id: entry,
-              };
-            } catch {
-              throw new Error(`Cannot find server entry ${JSON.stringify(id)}`);
+                return {
+                  id: entry,
+                };
+              } catch {
+                throw new Error(`Cannot find server entry ${JSON.stringify(id)}`);
+              }
             }
           }
 
