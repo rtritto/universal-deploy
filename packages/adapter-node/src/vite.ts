@@ -39,7 +39,7 @@ export function node(options?: { static?: string | boolean; importer?: string; c
             importerResolvedId = importerResolved?.id;
           }
 
-          let resolved: { id: string } | undefined;
+          let resolved: { id: string } | null = null;
           if (options?.customServe) {
             resolved = await this.resolve(options.customServe, importerResolvedId ?? importer);
             if (!resolved) {
